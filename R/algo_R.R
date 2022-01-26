@@ -30,7 +30,7 @@ BS_R<- function(s,e,y,pen=1.358){
     message("pen: ",pen)
     message("max(css_stats): ",max(css_stats))
     if (max(css_stats)> pen) {
-      return(c(binSeg(s,cp,y,pen),cp,binSeg(cp+1,e,y,pen)))
+      return(c(BS_R(s,cp,y,pen),cp,BS_R(cp+1,e,y,pen)))
     } else {
       return(c())
     }

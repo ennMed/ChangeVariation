@@ -84,7 +84,7 @@ for(i in seq(from=2, to=N, by=50)){
   ####################
   y = data_generator(i, positions, variances)
   start_time <- Sys.time()
-  variance::cpt_naive( y, 100, 0.5)
+  variance::OP_cpp( y, 2)
   ####################
   end_time <- Sys.time()
   time = c(time, end_time-start_time)

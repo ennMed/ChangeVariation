@@ -5,7 +5,7 @@ css_statistic <- function(y) {
     .Call(`_variance_css_statistic`, y)
 }
 
-BS_rcpp <- function(s, e, y, penality) {
+BS_rcpp <- function(s, e, y, penality = 1.358) {
     .Call(`_variance_BS_rcpp`, s, e, y, penality)
 }
 
