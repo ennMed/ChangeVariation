@@ -187,7 +187,7 @@ PELT <- function(data,params=1,K=0){
 }
 
 
-cpt_naive<- function(x,w,l) {
+cpt_naive<- function(x,w) {
   
   library(gfpop)
   library(zoo)
@@ -202,14 +202,13 @@ cpt_naive<- function(x,w,l) {
     ftest=f$statistic
     re=data.frame(ftest,pval)
     
-    return(re)
+    return(ftest)
     
   } 
   
   window_ftest<-rollapply(x, width = w, FUN =ftest_fstat)
-  ftests<- as.vector(window_ftest[,1])
-  pvalues<- as.vector(window_ftest[,2])
-  fstat <- ftests[ftests>l]
+  ftests<- window_ftest
+  fstat <- ftests
   biggest_values=sort(fstat,decreasing=TRUE)[1:w]
   
   
@@ -217,7 +216,7 @@ cpt_naive<- function(x,w,l) {
   
   for (i in 1:w) {
     
-    indexz=c(which(fstat==biggest_values[i]))
+    indexz=c(which(ftests==biggest_values[i]))
     new_vec=c(new_vec,indexz)
   }
   new_vec
@@ -227,24 +226,12 @@ cpt_naive<- function(x,w,l) {
   deletx<- function(x,w) {
     
     n=length(x)-1
-    
     new_vecu=vector(mode='numeric')
-    
     for (o in 1:n) {
-      
       if(abs((x[o])-(x[o+1])) > (w*2)) {
-        
-        
         a=c(x[o],x[o+1])
-        
-        
-        
-        
         new_vecu=c(new_vecu,a)
-        
       }
-      
-      
     }
     return(new_vecu)
   }
@@ -260,10 +247,7 @@ cpt_naive<- function(x,w,l) {
     i2 <- unname(tapply(x, grp, function(i) mean(i[length(i) > 1])))
     
     return(c(i1, i2[!is.na(i2)]))
-    
-    
   }
-  
   ptch=as.integer(get_vec(tau,(w*2)))
   
   return(ptch)
