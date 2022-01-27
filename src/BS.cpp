@@ -55,7 +55,7 @@ NumericVector css_statistic(NumericVector &y){
 }
 
 // [[Rcpp::export]]
-Rcpp::List BS_rcpp(int s, int e, NumericVector &y, float penality = 1.358){
+Rcpp::List BS_rcpp(int s , int e, NumericVector &y, float penality = 1.358){
   if(e-s ==1){
     Rcpp::List res;
     return res;

@@ -20,15 +20,16 @@ css_stat <- function(y){
 }
 
 #définition de la fonction BS
-BS_R<- function(s,e,y,pen=1.358){
+BS_R<- function(s, e, y, pen=1.358){
+  #the default value of s in the first iteration is 1
   if (e-s==1) {
     return(c())
   } else {
     css_stats <- css_stat(y[s:e])
     cp <- which.max(css_stats) + s
-    message("cp: ",cp)
-    message("pen: ",pen)
-    message("max(css_stats): ",max(css_stats))
+    #message("cp: ",cp)
+    #message("pen: ",pen)
+    #message("max(css_stats): ",max(css_stats))
     if (max(css_stats)> pen) {
       return(c(BS_R(s,cp,y,pen),cp,BS_R(cp+1,e,y,pen)))
     } else {
